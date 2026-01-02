@@ -1,0 +1,91 @@
+# ============================
+# Java / Spring Boot (Backend)
+# ============================
+**/target/
+**/build/
+**/.classpath
+**/.project
+**/.settings/
+**/.idea/
+**/*.iml
+
+# Logs
+*.log
+
+# Maven / Gradle
+**/.mvn/
+**/gradle/
+**/gradlew
+**/gradlew.bat
+**/.gradle/
+
+# ============================
+# React Native (Frontend)
+# ============================
+
+# Node
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# React Native
+**/ios/Pods/
+**/ios/build/
+**/android/build/
+**/android/app/build/
+
+# Android
+**/.gradle/
+**/android/.idea/
+**/android/local.properties
+**/android/captures/
+**/android/.cxx/
+
+# iOS
+**/ios/*.xcworkspace
+**/ios/*.xcuserstate
+**/ios/DerivedData/
+**/ios/build/
+**/ios/.xcode.env.local
+
+# Expo
+**/.expo/
+**/web-build/
+
+# Metro / React Native cache
+**/.metro-cache/
+**/.react-native-cache/
+
+# ============================
+# Tests / Coverage
+# ============================
+**/coverage/
+**/__tests__/__snapshots__/
+
+# ============================
+# IDEs and Editors
+# ============================
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-workspace
+*.launch
+
+# ============================
+# OS generated files
+# ============================
+.DS_Store
+Thumbs.db
+
+# ============================
+# Env / Secrets
+# ============================
+.env
+.env.*.local
+*.keystore
+*.jks

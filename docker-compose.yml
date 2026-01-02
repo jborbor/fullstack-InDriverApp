@@ -1,0 +1,42 @@
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: newsportal-app-mysql-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: db_news_portal
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./newsportal-app-database/sql:/docker-entrypoint-initdb.d
+    networks:
+      - newsportal-network
+
+  newsportal-app-backend:
+    build: ./newsportal-app-backend
+    container_name: newsportal-app-backend
+    mem_limit: 800m
+    ports:
+      - "8080:8080"
+    networks:
+      - newsportal-network
+    depends_on:
+      - mysql
+
+  newsportal-app-frontend:
+    build: ./newsportal-app-frontend
+    container_name: newsportal-app-frontend
+    mem_limit: 800m
+    ports:
+      - "4200:80"
+    networks:
+      - newsportal-network
+
+volumes:
+  mysql-data:
+
+networks:
+  newsportal-network:
