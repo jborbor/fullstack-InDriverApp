@@ -1,13 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+import DefaultRoundedButton from "./presentation/components/DefaultRoundedButon";
+import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 
 export default function App() {
   return (
@@ -45,9 +37,13 @@ export default function App() {
           />
         </View>
 
-        <TouchableOpacity style={styles.roundedButton}>
-          <Text style={styles.textButton}>INICIAR SESION</Text>
-        </TouchableOpacity>
+        <DefaultRoundedButton
+          text="INICIAR SESION"
+          onPress={() => {
+            // Handle login press
+          }}
+          backgroundColor="blue"
+        />
 
         <View style={styles.containerTextDontHaveAccount}>
           <View style={styles.divider}></View>
@@ -55,9 +51,13 @@ export default function App() {
           <View style={styles.divider}></View>
         </View>
 
-        <TouchableOpacity style={styles.roundedButton}>
-          <Text style={styles.textButton}>REGISTRATE</Text>
-        </TouchableOpacity>
+        <DefaultRoundedButton
+          text="REGISTRATE"
+          onPress={() => {
+            // Handle register press
+          }}
+          backgroundColor="green"
+        />
       </View>
     </View>
   );
@@ -117,20 +117,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     marginRight: 15,
-  },
-  roundedButton: {
-    width: "100%",
-    height: 55,
-    backgroundColor: "blue",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 50,
-    marginTop: 25,
-  },
-  textButton: {
-    color: "white",
-    fontSize: 15,
-    fontWeight: "bold",
   },
   containerTextDontHaveAccount: {
     flexDirection: "row",
