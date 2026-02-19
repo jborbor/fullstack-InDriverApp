@@ -3,12 +3,16 @@ package com.project.indriver_backend_sb.models.id;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class UserRoleId implements Serializable {
 
@@ -16,7 +20,7 @@ public class UserRoleId implements Serializable {
     private Long userId;
 
     @Column(name = "id_rol")
-    private Long roleId;
+    private String roleId;
 
     @Override
     public boolean equals(Object o){

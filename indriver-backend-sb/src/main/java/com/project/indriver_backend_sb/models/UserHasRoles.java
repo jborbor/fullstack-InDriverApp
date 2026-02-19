@@ -21,4 +21,13 @@ public class UserHasRoles {
     @MapsId("roleId")
     @JoinColumn(name = "id_rol")
     private Role role;
+
+    public UserHasRoles() {}
+
+    public UserHasRoles(User user, Role role) {
+        this.user = user;
+        this.role = role;
+        this.id = new UserRoleId(user.getId(), role.getId());
+    }
+
 }

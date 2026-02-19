@@ -1,22 +1,20 @@
-# NEWS PORTAL - Full Stack Project
+# inDriverApp - Full Stack Project
 
-Aplicacion portal de noticias permite la gestion de noticias y administracion de favoritos, desarrollado con una arquitectura hexagonal utilizando **Spring Boot**, **Angular**, **MySQL** y **Docker**.
+Aplicación inDriver para gestión usuarios y conductores, desarrollada con **Spring Boot**, **React Native (Expo)**, **MySQL** y **Docker**.
 
 ## 📦 Estructura del Proyecto
 
 ```
-fullstack-MediCenter/
-├── newsportal-app-backend/      # Api para la gestion del sistema
-├── newsportal-app-database/
-│   └── sql/                     # Scripts y stored procedures
-├── newsportal-app-frontend/     # Interfaz de usuario (Angular)
-├── docker-compose.yml
+fullstack-InDriverApp/
+├── indriver-backend-sb/         # API backend (Spring Boot)
+├── indriver-frontend-rn/        # App móvil (React Native)
+├── docker-compose.yml           # Orquestación de servicios
 ```
 
 ## 🚀 Tecnologías Usadas
 
-- Spring Boot 3 (Java 21)
-- Angular
+- Spring Boot 4 (Java 17)
+- React Native (Expo, TypeScript)
 - MySQL 8
 - Docker + Docker Compose
 
@@ -25,11 +23,11 @@ fullstack-MediCenter/
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/jborbor/fullstack-NewsPortalApp.git
-cd fullstack-newsportalapp
+git clone
+cd fullstack-InDriverApp
 ```
 
-2. Levanta los contenedores:
+2. Levanta los servicios con Docker Compose:
 
 ```bash
 docker compose up --build
@@ -38,14 +36,22 @@ docker compose up --build
 Esto levantará:
 
 - La base de datos MySQL
-- Ejecutara automaticamente los scripts de creacion de BD, stored procedures, etc:
-- Los microservicios backend
-- El frontend Angular (vía NGINX)
+- El backend Spring Boot
 
-## 📦 Documentacion de laS api con OpenApi
+3. Para el frontend móvil:
 
-http://localhost:8080/api/v1/swagger-ui/index.html
+```bash
+cd indriver-frontend-rn
+npm install
+npm start
+# o usa 'expo start' para abrir en emulador o dispositivo
+```
+
+## 📖 Documentación de la API
+
+Si tienes Swagger/OpenAPI habilitado:
+http://localhost:8080/swagger-ui/index.html
 
 ## 📬 Contacto
 
-Proyecto desarrollado por [].
+Proyecto desarrollado por Jonathan Borbor.
