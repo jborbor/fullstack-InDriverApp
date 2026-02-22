@@ -32,4 +32,25 @@ public class JwtUtil {
                 .compact();
     }
 
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(key)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public String extractUserName(String token) {
+        return getClaims(token).getSubject();
+    }
+
+    private boolean isTokenExpired(String token) {
+        return getClaims(token).getExpiration().before(new Date());
+    }
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        String username = extractUserName(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    }
+
 }
