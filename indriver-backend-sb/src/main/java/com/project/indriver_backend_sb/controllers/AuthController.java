@@ -2,6 +2,8 @@ package com.project.indriver_backend_sb.controllers;
 
 import com.project.indriver_backend_sb.dto.user.CreateUserRequest;
 import com.project.indriver_backend_sb.dto.user.CreateUserResponse;
+import com.project.indriver_backend_sb.dto.user.LoginRequest;
+import com.project.indriver_backend_sb.dto.user.LoginResponse;
 import com.project.indriver_backend_sb.models.User;
 import com.project.indriver_backend_sb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,20 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
                     "message", e.getMessage(),
                     "status", HttpStatus.BAD_REQUEST.value()
+            ));
+        }
+
+    }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request){
+        try {
+            LoginResponse response = userService.login(request);
+            return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
+                    "message", e.getMessage(),
+                    "status", HttpStatus.UNAUTHORIZED.value()
             ));
         }
 

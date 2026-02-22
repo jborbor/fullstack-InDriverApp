@@ -3,12 +3,15 @@ package com.project.indriver_backend_sb.services;
 import com.project.indriver_backend_sb.dto.role.RoleDTO;
 import com.project.indriver_backend_sb.dto.user.CreateUserRequest;
 import com.project.indriver_backend_sb.dto.user.CreateUserResponse;
+import com.project.indriver_backend_sb.dto.user.LoginRequest;
+import com.project.indriver_backend_sb.dto.user.LoginResponse;
 import com.project.indriver_backend_sb.models.Role;
 import com.project.indriver_backend_sb.models.User;
 import com.project.indriver_backend_sb.models.UserHasRoles;
 import com.project.indriver_backend_sb.repositories.RoleRepository;
 import com.project.indriver_backend_sb.repositories.UserHasRolesRepository;
 import com.project.indriver_backend_sb.repositories.UserRepository;
+import com.project.indriver_backend_sb.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Transactional
     public CreateUserResponse create(CreateUserRequest request){
@@ -66,6 +72,38 @@ public class UserService {
 
         response.setRoles(rolesDTO);
 
+
+        return response;
+    }
+
+    @Transactional
+    public LoginResponse login(LoginRequest request){
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Email no encontrado"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())){
+            throw new RuntimeException("Contraseña incorrecta");
+        }
+
+        String token = jwtUtil.generateToken(user);
+
+        List<Role> roles = roleRepository.findAllByUserHasRoles_User_Id(user.getId());
+        List<RoleDTO> rolesDTO = roles.stream()
+                .map(role -> new RoleDTO(role.getId(), role.getName(), role.getImage(), role.getRoute()))
+                .toList();
+
+        CreateUserResponse createUserResponse = new CreateUserResponse();
+        createUserResponse.setId(user.getId());
+        createUserResponse.setName(user.getName());
+        createUserResponse.setLastName(user.getLastName());
+        createUserResponse.setEmail(user.getEmail());
+        createUserResponse.setPhone(user.getPhone());
+        createUserResponse.setImage(user.getImage());
+        createUserResponse.setRoles(rolesDTO);
+
+        LoginResponse response = new LoginResponse();
+        response.setToken("Bearer " + token);
+        response.setUser(createUserResponse);
 
         return response;
     }
